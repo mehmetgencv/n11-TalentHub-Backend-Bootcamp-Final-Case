@@ -18,6 +18,8 @@ public class Restaurant {
     private Long id;
     private String name;
     private String address;
+    private String phone;
+    private String email;
     private Double rate;
     private double latitude;
     private double longitude;
