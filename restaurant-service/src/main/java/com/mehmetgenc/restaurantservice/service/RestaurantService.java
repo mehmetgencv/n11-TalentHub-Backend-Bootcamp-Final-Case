@@ -12,4 +12,6 @@ public interface RestaurantService {
     Restaurant getById(Long restaurantId);
 
     void delete(Long restaurantId);
+
+    Restaurant updateRate(Long restaurantId, Double rate);
 }

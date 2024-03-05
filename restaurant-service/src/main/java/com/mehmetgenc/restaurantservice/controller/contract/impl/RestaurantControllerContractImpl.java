@@ -40,4 +40,10 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
     public void delete(Long restaurantId) {
         restaurantService.delete(restaurantId);
     }
+
+    @Override
+    public RestaurantDTO updateRate(Long restaurantId, Double rate) {
+        Restaurant restaurant = restaurantService.updateRate(restaurantId, rate);
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
+    }
 }

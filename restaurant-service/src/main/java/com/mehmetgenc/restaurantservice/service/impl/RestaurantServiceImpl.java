@@ -35,5 +35,16 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurantRepository.deleteById(restaurantId);
     }
 
+    @Override
+    public Restaurant updateRate(Long restaurantId, Double rate) {
+        Restaurant restaurant = getById(restaurantId);
+        Double currentRate = restaurant.getRate();
+        if(currentRate != null){
+            rate = (currentRate + rate) / 2;
+        }
+        restaurant.setRate(rate);
+        return restaurantRepository.save(restaurant);
+    }
+
 
 }

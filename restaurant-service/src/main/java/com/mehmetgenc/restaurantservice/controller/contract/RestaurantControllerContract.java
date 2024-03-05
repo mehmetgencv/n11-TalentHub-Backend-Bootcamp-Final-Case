@@ -13,4 +13,6 @@ public interface RestaurantControllerContract {
     RestaurantDTO getById(Long restaurantId);
 
     void delete(Long restaurantId);
+
+    RestaurantDTO updateRate(Long restaurantId, Double rate);
 }

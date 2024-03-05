@@ -41,4 +41,11 @@ public class RestaurantController {
         restaurantControllerContract.delete(restaurantId);
         return ResponseEntity.ok(RestResponse.of("Restaurant deleted"));
     }
+
+    @PatchMapping("/updateRate/{restaurantId}")
+    public ResponseEntity<RestResponse<RestaurantDTO>> updateRateRestaurant(@PathVariable Long restaurantId, @RequestParam Double rate){
+        RestaurantDTO restaurantDto = restaurantControllerContract.updateRate(restaurantId, rate);
+        return ResponseEntity.ok(RestResponse.of(restaurantDto));
+    }
+
 }
