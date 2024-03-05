@@ -6,6 +6,8 @@ import com.mehmetgenc.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService {
@@ -14,5 +16,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant save(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
+    }
+
+    @Override
+    public List<Restaurant> getAll() {
+        return restaurantRepository.findAll();
     }
 }

@@ -5,10 +5,9 @@ import com.mehmetgenc.restaurantservice.dto.RestaurantDTO;
 import com.mehmetgenc.restaurantservice.dto.RestaurantSaveRequest;
 import com.mehmetgenc.restaurantservice.general.RestResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/restaurants")
@@ -23,5 +22,11 @@ public class RestaurantController {
     public ResponseEntity<RestResponse<RestaurantDTO>> saveRestaurant(@RequestBody RestaurantSaveRequest restaurantSaveRequest){
         RestaurantDTO restaurantDto = restaurantControllerContract.save(restaurantSaveRequest);
         return ResponseEntity.ok(RestResponse.of(restaurantDto));
+    }
+
+    @GetMapping
+    public ResponseEntity<RestResponse<List<RestaurantDTO>>> getAllRestaurants(){
+        List<RestaurantDTO> restaurantDtoList = restaurantControllerContract.getAll();
+        return ResponseEntity.ok(RestResponse.of(restaurantDtoList));
     }
 }

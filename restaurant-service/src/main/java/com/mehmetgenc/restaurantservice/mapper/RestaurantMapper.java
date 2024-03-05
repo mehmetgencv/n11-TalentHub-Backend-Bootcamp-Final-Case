@@ -8,6 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RestaurantMapper {
@@ -18,4 +20,6 @@ public interface RestaurantMapper {
     Restaurant convertToRestaurant(RestaurantSaveRequest restaurantSaveRequest);
 
     RestaurantDTO convertToRestaurantDTO(Restaurant restaurant);
+
+    List<RestaurantDTO> convertToRestaurantDTOList(List<Restaurant> restaurantList);
 }

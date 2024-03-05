@@ -9,6 +9,8 @@ import com.mehmetgenc.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RestaurantControllerContractImpl implements RestaurantControllerContract {
@@ -20,5 +22,11 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
         restaurant = restaurantService.save(restaurant);
         return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
 
+    }
+
+    @Override
+    public List<RestaurantDTO> getAll() {
+        List<Restaurant> restaurantList = restaurantService.getAll();
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTOList(restaurantList);
     }
 }
