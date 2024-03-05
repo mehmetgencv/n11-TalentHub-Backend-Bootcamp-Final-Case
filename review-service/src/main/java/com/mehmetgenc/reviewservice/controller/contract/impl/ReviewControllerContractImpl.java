@@ -19,9 +19,8 @@ import java.util.List;
 public class ReviewControllerContractImpl implements ReviewControllerContract {
     private final ReviewService reviewService;
     @Override
-    public ReviewDTO save(ReviewSaveRequest productSaveRequest) {
-        Review review = ReviewMapper.INSTANCE.convertToReview(productSaveRequest);
-        review = reviewService.save(review);
+    public ReviewDTO save(ReviewSaveRequest reviewSaveRequest) {
+        Review review = reviewService.save(reviewSaveRequest);
         return ReviewMapper.INSTANCE.convertToReviewDto(review);
     }
 

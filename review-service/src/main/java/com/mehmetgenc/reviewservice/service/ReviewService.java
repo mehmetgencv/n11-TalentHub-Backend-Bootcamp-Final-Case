@@ -1,11 +1,13 @@
 package com.mehmetgenc.reviewservice.service;
 
 import com.mehmetgenc.reviewservice.entity.Review;
+import com.mehmetgenc.reviewservice.request.ReviewSaveRequest;
 
 import java.util.List;
 
 public interface ReviewService {
     Review save(Review review);
+    Review save(ReviewSaveRequest reviewSaveRequest);
 
     Review findById(Long reviewId);
 
