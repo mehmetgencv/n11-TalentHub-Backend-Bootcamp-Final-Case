@@ -29,4 +29,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.findById(restaurantId).orElseThrow(
                 () -> new RestaurantNotFoundException("Restaurant not found"));
     }
+
+    @Override
+    public void delete(Long restaurantId) {
+        restaurantRepository.deleteById(restaurantId);
+    }
+
+
 }

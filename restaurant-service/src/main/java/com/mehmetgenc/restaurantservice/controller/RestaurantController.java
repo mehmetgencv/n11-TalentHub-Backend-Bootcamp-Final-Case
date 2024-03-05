@@ -35,4 +35,10 @@ public class RestaurantController {
         RestaurantDTO restaurantDto = restaurantControllerContract.getById(restaurantId);
         return ResponseEntity.ok(RestResponse.of(restaurantDto));
     }
+
+    @DeleteMapping("/{restaurantId}")
+    public ResponseEntity<RestResponse<String>> deleteRestaurantById(@PathVariable Long restaurantId){
+        restaurantControllerContract.delete(restaurantId);
+        return ResponseEntity.ok(RestResponse.of("Restaurant deleted"));
+    }
 }

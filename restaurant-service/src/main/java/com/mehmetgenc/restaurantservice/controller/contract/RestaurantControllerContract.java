@@ -11,4 +11,6 @@ public interface RestaurantControllerContract {
     List<RestaurantDTO> getAll();
 
     RestaurantDTO getById(Long restaurantId);
+
+    void delete(Long restaurantId);
 }

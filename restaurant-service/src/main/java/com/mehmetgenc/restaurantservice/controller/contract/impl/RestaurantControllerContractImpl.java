@@ -35,4 +35,9 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
         Restaurant restaurant = restaurantService.getById(restaurantId);
         return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
     }
+
+    @Override
+    public void delete(Long restaurantId) {
+        restaurantService.delete(restaurantId);
+    }
 }

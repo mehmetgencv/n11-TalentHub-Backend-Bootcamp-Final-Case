@@ -10,4 +10,6 @@ public interface RestaurantService {
     List<Restaurant> getAll();
 
     Restaurant getById(Long restaurantId);
+
+    void delete(Long restaurantId);
 }
