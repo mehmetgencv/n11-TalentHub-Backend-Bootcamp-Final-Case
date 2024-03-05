@@ -9,4 +9,6 @@ public interface RestaurantControllerContract {
     RestaurantDTO save(RestaurantSaveRequest restaurantSaveRequest);
 
     List<RestaurantDTO> getAll();
+
+    RestaurantDTO getById(Long restaurantId);
 }

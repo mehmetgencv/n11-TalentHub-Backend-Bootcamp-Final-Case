@@ -1,6 +1,7 @@
 package com.mehmetgenc.restaurantservice.service.impl;
 
 import com.mehmetgenc.restaurantservice.entity.Restaurant;
+import com.mehmetgenc.restaurantservice.exception.RestaurantNotFoundException;
 import com.mehmetgenc.restaurantservice.repository.RestaurantRepository;
 import com.mehmetgenc.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<Restaurant> getAll() {
         return restaurantRepository.findAll();
+    }
+
+    @Override
+    public Restaurant getById(Long restaurantId) {
+        return restaurantRepository.findById(restaurantId).orElseThrow(
+                () -> new RestaurantNotFoundException("Restaurant not found"));
     }
 }

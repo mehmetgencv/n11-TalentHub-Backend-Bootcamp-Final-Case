@@ -8,4 +8,6 @@ public interface RestaurantService {
     Restaurant save(Restaurant restaurant);
 
     List<Restaurant> getAll();
+
+    Restaurant getById(Long restaurantId);
 }

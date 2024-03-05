@@ -29,4 +29,10 @@ public class RestaurantController {
         List<RestaurantDTO> restaurantDtoList = restaurantControllerContract.getAll();
         return ResponseEntity.ok(RestResponse.of(restaurantDtoList));
     }
+
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<RestResponse<RestaurantDTO>> getRestaurantById(@PathVariable Long restaurantId){
+        RestaurantDTO restaurantDto = restaurantControllerContract.getById(restaurantId);
+        return ResponseEntity.ok(RestResponse.of(restaurantDto));
+    }
 }

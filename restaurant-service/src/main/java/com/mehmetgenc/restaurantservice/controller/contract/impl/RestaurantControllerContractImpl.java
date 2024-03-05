@@ -29,4 +29,10 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
         List<Restaurant> restaurantList = restaurantService.getAll();
         return RestaurantMapper.INSTANCE.convertToRestaurantDTOList(restaurantList);
     }
+
+    @Override
+    public RestaurantDTO getById(Long restaurantId) {
+        Restaurant restaurant = restaurantService.getById(restaurantId);
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
+    }
 }
