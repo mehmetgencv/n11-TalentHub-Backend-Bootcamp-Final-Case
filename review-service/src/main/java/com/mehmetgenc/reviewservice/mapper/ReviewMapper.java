@@ -24,6 +24,7 @@ public interface ReviewMapper {
 
     Review convertToReview(ReviewSaveRequest productSaveRequest);
 
+    @Mapping(target = "userId", source = "user.id")
     ReviewDTO convertToReviewDto(Review review);
 
     List<ReviewDTO> convertToReviewDtos(List<Review> reviews);
