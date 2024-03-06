@@ -12,10 +12,15 @@
     <groupId>com.mehmetgenc.restaurantservice</groupId>
     <artifactId>restaurant-service</artifactId>
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.solr</groupId>-->
+<!--            <artifactId>solr-solrj</artifactId>-->
+<!--            <version>9.5.0</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>org.apache.solr</groupId>
-            <artifactId>solr-solrj</artifactId>
-            <version>9.5.0</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
     </dependencies>
