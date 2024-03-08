@@ -1,5 +1,6 @@
 package com.mehmetgenc.reviewservice.service.impl;
 
+import com.mehmetgenc.reviewservice.controller.contract.impl.RestaurantControllerContractImpl;
 import com.mehmetgenc.reviewservice.entity.Review;
 import com.mehmetgenc.reviewservice.entity.User;
 import com.mehmetgenc.reviewservice.exception.ReviewNotFoundException;
@@ -16,11 +17,13 @@ import java.util.List;
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserService userService;
+    private final RestaurantControllerContractImpl restaurantControllerContract;
 
 
-    public ReviewServiceImpl(ReviewRepository reviewRepository, UserService userService) {
+    public ReviewServiceImpl(ReviewRepository reviewRepository, UserService userService, RestaurantControllerContractImpl restaurantControllerContract) {
         this.reviewRepository = reviewRepository;
         this.userService = userService;
+        this.restaurantControllerContract = restaurantControllerContract;
     }
 
     @Override
@@ -33,6 +36,8 @@ public class ReviewServiceImpl implements ReviewService {
         Long userId = reviewSaveRequest.userId();
         User user = userService.findById(userId);
         review.setUser(user);
+        Double rate = reviewSaveRequest.rate().getValue();
+        restaurantControllerContract.updateRate(reviewSaveRequest.restaurantId(), rate);
         return reviewRepository.save(review);
     }
 
@@ -55,10 +60,5 @@ public class ReviewServiceImpl implements ReviewService {
     public Boolean deleteById(Long reviewId) {
         reviewRepository.deleteById(reviewId);
         return true;
-    }
-
-    @Override
-    public List<Review> saveBatch(List<Review> reviews) {
-        return reviewRepository.saveAll(reviews);
     }
 }
