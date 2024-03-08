@@ -1,9 +1,12 @@
 package com.mehmetgenc.reviewservice.client;
 
 import com.mehmetgenc.reviewservice.dto.RestaurantInfoDTO;
+import com.mehmetgenc.reviewservice.dto.RestaurantRecommendInfoDTO;
 import com.mehmetgenc.reviewservice.general.RestResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @FeignClient(value = "restaurantService", url = "http://localhost:8081/api/v1/restaurants")
@@ -14,4 +17,7 @@ public interface RestaurantServiceClient {
 
     @PostMapping(value = "/updateRate/{restaurantId}")
     RestResponse<RestaurantInfoDTO> updateRate(@PathVariable Long restaurantId, @RequestParam Double rate);
+
+    @GetMapping
+    RestResponse<List<RestaurantRecommendInfoDTO>> getAllRestaurants();
 }
