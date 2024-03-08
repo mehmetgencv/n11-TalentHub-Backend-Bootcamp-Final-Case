@@ -46,4 +46,11 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
         Restaurant restaurant = restaurantService.updateRate(restaurantId, rate);
         return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
     }
+
+    @Override
+    public List<RestaurantDTO> saveBatch(List<RestaurantSaveRequest> restaurantSaveRequestList) {
+        List<Restaurant> restaurantList = RestaurantMapper.INSTANCE.convertToRestaurantList(restaurantSaveRequestList);
+        restaurantList = restaurantService.saveBatch(restaurantList);
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTOList(restaurantList);
+    }
 }

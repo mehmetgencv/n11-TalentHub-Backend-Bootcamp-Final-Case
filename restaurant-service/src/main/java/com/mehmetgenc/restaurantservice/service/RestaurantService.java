@@ -14,4 +14,6 @@ public interface RestaurantService {
     void delete(Long restaurantId);
 
     Restaurant updateRate(Long restaurantId, Double rate);
+
+    List<Restaurant> saveBatch(List<Restaurant> restaurantList);
 }

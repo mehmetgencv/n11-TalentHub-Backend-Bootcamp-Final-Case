@@ -15,4 +15,6 @@ public interface RestaurantControllerContract {
     void delete(Long restaurantId);
 
     RestaurantDTO updateRate(Long restaurantId, Double rate);
+
+    List<RestaurantDTO> saveBatch(List<RestaurantSaveRequest> restaurantSaveRequestList);
 }

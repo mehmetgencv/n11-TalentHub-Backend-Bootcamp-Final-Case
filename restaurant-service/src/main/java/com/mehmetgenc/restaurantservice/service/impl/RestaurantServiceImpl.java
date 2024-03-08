@@ -46,5 +46,10 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
+    @Override
+    public List<Restaurant> saveBatch(List<Restaurant> restaurantList) {
+        return restaurantRepository.saveAll(restaurantList);
+    }
+
 
 }

@@ -48,4 +48,10 @@ public class RestaurantController {
         return ResponseEntity.ok(RestResponse.of(restaurantDto));
     }
 
+    @PostMapping("/saveBatchRestaurants")
+    public ResponseEntity<RestResponse<List<RestaurantDTO>>> saveBatchRestaurants(@RequestBody List<RestaurantSaveRequest> restaurantSaveRequestList){
+        List<RestaurantDTO> restaurantDtoList = restaurantControllerContract.saveBatch(restaurantSaveRequestList);
+        return ResponseEntity.ok(RestResponse.of(restaurantDtoList));
+    }
+
 }
