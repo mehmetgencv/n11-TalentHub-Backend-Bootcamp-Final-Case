@@ -17,6 +17,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserService userService;
 
+
     public ReviewServiceImpl(ReviewRepository reviewRepository, UserService userService) {
         this.reviewRepository = reviewRepository;
         this.userService = userService;

@@ -17,13 +17,12 @@ public class Review {
     @ManyToOne
     private User user;
 
-    @ManyToOne
-    private Restaurant restaurant;
+    @Column(name = "RESTAURANT_ID", nullable = false)
+    Long restaurantId;
 
     @Column(name = "COMMENT", length = 100)
     private String comment;
 
-    @Column(name = "RATE", length = 30, nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Column(name = "RATE", length = 10, nullable = false)
     private Rate rate;
 }
