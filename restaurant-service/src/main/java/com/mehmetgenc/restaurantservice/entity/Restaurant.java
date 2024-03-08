@@ -23,4 +23,14 @@ public class Restaurant {
     private Double rate;
     private double latitude;
     private double longitude;
+
+    public Restaurant(String name, String address, String phone, String email, Double rate, double latitude, double longitude) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.rate = rate;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
