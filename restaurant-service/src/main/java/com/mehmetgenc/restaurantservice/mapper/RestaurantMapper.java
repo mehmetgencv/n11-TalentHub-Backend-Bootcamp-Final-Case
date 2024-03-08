@@ -22,4 +22,6 @@ public interface RestaurantMapper {
     RestaurantDTO convertToRestaurantDTO(Restaurant restaurant);
 
     List<RestaurantDTO> convertToRestaurantDTOList(List<Restaurant> restaurantList);
+
+    List<Restaurant> convertToRestaurantList(List<RestaurantSaveRequest> restaurantSaveRequestList);
 }

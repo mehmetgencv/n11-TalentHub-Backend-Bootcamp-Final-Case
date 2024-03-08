@@ -2,6 +2,7 @@ package com.mehmetgenc.reviewservice.mapper;
 
 
 import com.mehmetgenc.reviewservice.dto.UserDTO;
+import com.mehmetgenc.reviewservice.dto.UserLocationDTO;
 import com.mehmetgenc.reviewservice.entity.User;
 import com.mehmetgenc.reviewservice.request.UserSaveRequest;
 import com.mehmetgenc.reviewservice.request.UserUpdateRequest;
@@ -28,4 +29,8 @@ public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
     void updateCustomerFields(@MappingTarget User user, UserUpdateRequest request);
+
+    UserLocationDTO convertToUserLocationDTO(User user);
+
+    List<User> convertToUsers(List<UserSaveRequest> userSaveRequestList);
 }
