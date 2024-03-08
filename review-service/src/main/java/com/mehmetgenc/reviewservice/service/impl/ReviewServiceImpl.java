@@ -56,4 +56,9 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.deleteById(reviewId);
         return true;
     }
+
+    @Override
+    public List<Review> saveBatch(List<Review> reviews) {
+        return reviewRepository.saveAll(reviews);
+    }
 }

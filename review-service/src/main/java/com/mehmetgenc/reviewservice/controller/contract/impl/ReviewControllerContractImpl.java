@@ -70,4 +70,11 @@ public class ReviewControllerContractImpl implements ReviewControllerContract {
         reviewService.save(review);
         return ReviewMapper.INSTANCE.convertToReviewDto(review);
     }
+
+    @Override
+    public List<ReviewDTO> saveBatch(List<ReviewSaveRequest> reviewSaveRequestList) {
+        List<Review> reviews = ReviewMapper.INSTANCE.convertToReviews(reviewSaveRequestList);
+        reviews = reviewService.saveBatch(reviews);
+        return ReviewMapper.INSTANCE.convertToReviewDtos(reviews);
+    }
 }

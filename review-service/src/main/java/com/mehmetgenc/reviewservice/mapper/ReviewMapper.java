@@ -31,4 +31,6 @@ public interface ReviewMapper {
 
     @Mapping(target = "id", ignore = true)
     void updateReviewFields(@MappingTarget Review review, ReviewUpdateRequest request);
+
+    List<Review> convertToReviews(List<ReviewSaveRequest> reviewSaveRequestList);
 }

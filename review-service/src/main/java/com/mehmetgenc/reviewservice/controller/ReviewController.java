@@ -76,4 +76,11 @@ public class ReviewController {
         return ResponseEntity.ok(RestResponse.of(reviewDTO));
 
     }
+
+    @PostMapping("/saveBatchReviews")
+    public ResponseEntity<RestResponse<List<ReviewDTO>>> saveBatchReviews(@RequestBody List<ReviewSaveRequest> reviewSaveRequestList){
+        List<ReviewDTO> reviewDTOS = reviewControllerContract.saveBatch(reviewSaveRequestList);
+        return ResponseEntity.ok(RestResponse.of(reviewDTOS));
+
+    }
 }

@@ -16,4 +16,6 @@ public interface ReviewService {
     List<Review> findAllReviewsByRestaurantId(Long restaurantId);
 
     Boolean deleteById(Long reviewId);
+
+    List<Review> saveBatch(List<Review> reviews);
 }

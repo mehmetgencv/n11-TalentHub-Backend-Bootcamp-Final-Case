@@ -23,4 +23,6 @@ public interface ReviewControllerContract {
     ReviewDTO updateRating(Long reviewId, Rate rating);
 
     ReviewDTO updateReview(Long reviewId, ReviewUpdateRequest reviewUpdateRequest);
+
+    List<ReviewDTO> saveBatch(List<ReviewSaveRequest> reviewSaveRequestList);
 }
