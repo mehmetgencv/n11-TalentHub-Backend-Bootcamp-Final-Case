@@ -1,0 +1,92 @@
+[
+  {
+    "userId": 1,
+    "restaurantId": 2,
+    "comment": "Great food and atmosphere!",
+    "rate": "FIVE"
+  },
+  {
+    "userId": 2,
+    "restaurantId": 1,
+    "comment": "Service was excellent, but the food was mediocre.",
+    "rate": "THREE"
+  },
+  {
+    "userId": 3,
+    "restaurantId": 2,
+    "comment": "The staff was rude and the food was cold.",
+    "rate": "TWO"
+  },
+  {
+    "userId": 4,
+    "restaurantId": 3,
+    "comment": "Amazing view from the terrace, but the prices were too high.",
+    "rate": "FOUR"
+  },
+  {
+    "userId": 5,
+    "restaurantId": 4,
+    "comment": "Best sushi in town!",
+    "rate": "FIVE"
+  },
+  {
+    "userId": 1,
+    "restaurantId": 5,
+    "comment": "The pizza was burnt and the waiter forgot our order.",
+    "rate": "ONE"
+  },
+  {
+    "userId": 2,
+    "restaurantId": 1,
+    "comment": "Delicious food and friendly staff!",
+    "rate": "FOUR"
+  },
+  {
+    "userId": 3,
+    "restaurantId": 2,
+    "comment": "The restaurant was clean and well-decorated.",
+    "rate": "FOUR"
+  },
+  {
+    "userId": 4,
+    "restaurantId": 3,
+    "comment": "Disappointing experience, wont be returning.",
+    "rate": "TWO"
+  },
+  {
+    "userId": 5,
+    "restaurantId": 4,
+    "comment": "Authentic French cuisine, highly recommended!",
+    "rate": "FIVE"
+  },
+  {
+    "userId": 1,
+    "restaurantId": 5,
+    "comment": "The pasta was undercooked and the portions were small.",
+    "rate": "TWO"
+  },
+  {
+    "userId": 2,
+    "restaurantId": 4,
+    "comment": "Lovely ambiance and delicious cocktails!",
+    "rate": "FOUR"
+  },
+  {
+    "userId": 3,
+    "restaurantId": 1,
+    "comment": "Average food quality, but the desserts were exceptional.",
+    "rate": "THREE"
+  },
+  {
+    "userId": 4,
+    "restaurantId": 2,
+    "comment": "Fast service, but the taste was lacking.",
+    "rate": "TWO"
+  },
+  {
+    "userId": 5,
+    "restaurantId": 3,
+    "comment": "Incredible seafood platter!",
+    "rate": "FIVE"
+  }
+]

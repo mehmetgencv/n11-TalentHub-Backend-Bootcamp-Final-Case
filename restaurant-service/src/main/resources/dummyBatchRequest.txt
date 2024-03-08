@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Restaurant A",
+    "address": "Address A",
+    "latitude": 40.7128,
+    "longitude": -74.0060,
+    "phone": "1234567890",
+    "email": "email1@example.com",
+    "description": "Description for Restaurant A"
+  },
+  {
+    "name": "Restaurant B",
+    "address": "Address B",
+    "latitude": 34.0522,
+    "longitude": -118.2437,
+    "phone": "1234567891",
+    "email": "email2@example.com",
+    "description": "Description for Restaurant B"
+  },
+  {
+    "name": "Restaurant C",
+    "address": "Address C",
+    "latitude": 51.5074,
+    "longitude": -0.1278,
+    "phone": "1234567892",
+    "email": "email3@example.com",
+    "description": "Description for Restaurant C"
+  },
+  {
+    "name": "Restaurant D",
+    "address": "Address D",
+    "latitude": 35.6895,
+    "longitude": 139.6917,
+    "phone": "1234567893",
+    "email": "email4@example.com",
+    "description": "Description for Restaurant D"
+  },
+  {
+    "name": "Restaurant E",
+    "address": "Address E",
+    "latitude": 48.8566,
+    "longitude": 2.3522,
+    "phone": "1234567894",
+    "email": "email5@example.com",
+    "description": "Description for Restaurant E"
+  },
+  {
+    "name": "Restaurant F",
+    "address": "Address F",
+    "latitude": 55.7558,
+    "longitude": 37.6176,
+    "phone": "1234567895",
+    "email": "email6@example.com",
+    "description": "Description for Restaurant F"
+  }
+]
