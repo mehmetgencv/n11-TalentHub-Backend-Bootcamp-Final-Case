@@ -5,7 +5,6 @@ import com.mehmetgenc.reviewservice.dto.ReviewDTO;
 import com.mehmetgenc.reviewservice.entity.Review;
 import com.mehmetgenc.reviewservice.entity.enums.Rate;
 import com.mehmetgenc.reviewservice.mapper.ReviewMapper;
-import com.mehmetgenc.reviewservice.mapper.UserMapper;
 import com.mehmetgenc.reviewservice.request.ReviewSaveRequest;
 import com.mehmetgenc.reviewservice.request.ReviewUpdateRequest;
 import com.mehmetgenc.reviewservice.service.ReviewService;
@@ -73,8 +72,7 @@ public class ReviewControllerContractImpl implements ReviewControllerContract {
 
     @Override
     public List<ReviewDTO> saveBatch(List<ReviewSaveRequest> reviewSaveRequestList) {
-        List<Review> reviews = ReviewMapper.INSTANCE.convertToReviews(reviewSaveRequestList);
-        reviews = reviewService.saveBatch(reviews);
+        List<Review> reviews = reviewSaveRequestList.stream().map(reviewService::save).toList();
         return ReviewMapper.INSTANCE.convertToReviewDtos(reviews);
     }
 }
