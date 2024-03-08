@@ -49,4 +49,11 @@ public class UserControllerContractImpl implements UserControllerContract {
         userService.save(user);
         return UserMapper.INSTANCE.convertToUserDto(user);
     }
+
+    @Override
+    public List<UserDTO> saveBatch(List<UserSaveRequest> userSaveRequestList) {
+        List<User> users = UserMapper.INSTANCE.convertToUsers(userSaveRequestList);
+        users = userService.saveBatch(users);
+        return UserMapper.INSTANCE.convertToUserDTOs(users);
+    }
 }

@@ -16,4 +16,6 @@ public interface UserControllerContract {
     String delete(Long userId);
 
     UserDTO update(Long userId, UserUpdateRequest userUpdateRequest);
+
+    List<UserDTO> saveBatch(List<UserSaveRequest> userSaveRequestList);
 }

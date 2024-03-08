@@ -49,4 +49,10 @@ public class UserController {
         return ResponseEntity.ok(RestResponse.of(userDto));
     }
 
+    @PostMapping("/saveBatchUsers")
+    public ResponseEntity<RestResponse<List<UserDTO>>> saveBatchUsers(@RequestBody List<UserSaveRequest> userSaveRequestList){
+        List<UserDTO> userDtoList = userControllerContract.saveBatch(userSaveRequestList);
+        return ResponseEntity.ok(RestResponse.of(userDtoList));
+    }
+
 }

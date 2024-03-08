@@ -14,4 +14,5 @@ public interface UserService {
     String delete(Long userId);
 
 
+    List<User> saveBatch(List<User> users);
 }

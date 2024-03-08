@@ -40,5 +40,10 @@ public class UserServiceImpl implements UserService {
         return "User deleted";
     }
 
+    @Override
+    public List<User> saveBatch(List<User> users) {
+        return userRepository.saveAll(users);
+    }
+
 
 }
