@@ -5,6 +5,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mehmetgenc.reviewservice.controller.contract.UserControllerContract;
 import com.mehmetgenc.reviewservice.dto.UserDTO;
 import com.mehmetgenc.reviewservice.entity.enums.Gender;
+import com.mehmetgenc.reviewservice.exception.UserNotFoundException;
 import com.mehmetgenc.reviewservice.request.UserSaveRequest;
 import com.mehmetgenc.reviewservice.request.UserUpdateRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -89,6 +91,24 @@ class UserControllerTest extends BaseControllerTest {
         assertTrue(mvcResult.getResponse().getContentAsString().contains(userDTO.name()));
         boolean success = isSuccess(mvcResult);
         assertTrue(success);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenUserNotFound() throws Exception {
+        //given
+        UserDTO userDTO = getExampleUserDTO();
+
+        //when
+        when(userControllerContract.findById(1L)).thenThrow(new UserNotFoundException("User not found"));
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/1"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andReturn();
+
+        //then
+        assertTrue(mvcResult.getResponse().getContentAsString().contains("User not found"));
+        boolean success = isSuccess(mvcResult);
+        assertFalse(success);
     }
 
     @Test
