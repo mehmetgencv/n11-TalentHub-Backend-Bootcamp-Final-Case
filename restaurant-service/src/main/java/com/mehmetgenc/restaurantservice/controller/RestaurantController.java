@@ -5,12 +5,15 @@ import com.mehmetgenc.restaurantservice.dto.RestaurantDTO;
 import com.mehmetgenc.restaurantservice.dto.RestaurantSaveRequest;
 import com.mehmetgenc.restaurantservice.general.RestResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/restaurants")
+@Validated
 public class RestaurantController {
     private final RestaurantControllerContract restaurantControllerContract;
 
@@ -19,7 +22,7 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public ResponseEntity<RestResponse<RestaurantDTO>> saveRestaurant(@RequestBody RestaurantSaveRequest restaurantSaveRequest){
+    public ResponseEntity<RestResponse<RestaurantDTO>> saveRestaurant(@RequestBody @Valid RestaurantSaveRequest restaurantSaveRequest){
         RestaurantDTO restaurantDto = restaurantControllerContract.save(restaurantSaveRequest);
         return ResponseEntity.ok(RestResponse.of(restaurantDto));
     }
