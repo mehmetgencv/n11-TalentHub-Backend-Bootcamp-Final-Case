@@ -1,11 +1,12 @@
 package com.mehmetgenc.reviewservice.entity;
 
 import com.mehmetgenc.reviewservice.entity.enums.Gender;
-import jakarta.persistence.*;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

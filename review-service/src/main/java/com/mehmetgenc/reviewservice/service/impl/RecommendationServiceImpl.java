@@ -23,7 +23,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     private final UserServiceImpl userServiceImpl;
 
-    @Value("${recommendation.maxDistance}")
+    @Value("${recommendation.max-distance}")
     double maxDistance;
 
     @Value("${recommendation.rate-weight}")

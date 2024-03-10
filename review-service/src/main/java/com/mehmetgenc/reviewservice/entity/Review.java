@@ -1,10 +1,11 @@
 package com.mehmetgenc.reviewservice.entity;
 
 import com.mehmetgenc.reviewservice.entity.enums.Rate;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @Getter

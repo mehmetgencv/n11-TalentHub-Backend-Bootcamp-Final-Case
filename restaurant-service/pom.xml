@@ -11,24 +11,22 @@
 
     <groupId>com.mehmetgenc.restaurantservice</groupId>
     <artifactId>restaurant-service</artifactId>
+
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.solr</groupId>-->
-<!--            <artifactId>solr-solrj</artifactId>-->
-<!--            <version>9.5.0</version>-->
-<!--        </dependency>-->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
+            <version>${spring-data-solr.version}</version>
         </dependency>
 
     </dependencies>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-data-solr.version>4.3.14</spring-data-solr.version>
+
     </properties>
 
 </project>
