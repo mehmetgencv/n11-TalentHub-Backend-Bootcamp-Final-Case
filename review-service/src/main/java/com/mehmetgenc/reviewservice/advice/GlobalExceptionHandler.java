@@ -5,8 +5,10 @@ import com.mehmetgenc.reviewservice.exception.ReviewServiceException;
 import com.mehmetgenc.reviewservice.exception.UserNotFoundException;
 import com.mehmetgenc.reviewservice.general.GeneralErrorMessages;
 import com.mehmetgenc.reviewservice.general.RestResponse;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +47,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         GeneralErrorMessages generalErrorMessages = new GeneralErrorMessages(LocalDateTime.now(), message, description);
         RestResponse restResponse = RestResponse.error(generalErrorMessages);
         return new ResponseEntity<>(restResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String message = ex.getBindingResult().getFieldError().getDefaultMessage();
+        String description = request.getDescription(false);
+        GeneralErrorMessages generalErrorMessages = new GeneralErrorMessages(LocalDateTime.now(), message, description);
+        RestResponse restResponse = RestResponse.error(generalErrorMessages);
+        return new ResponseEntity<>(restResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler

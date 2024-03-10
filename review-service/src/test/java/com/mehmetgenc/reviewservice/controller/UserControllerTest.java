@@ -155,7 +155,6 @@ class UserControllerTest extends BaseControllerTest {
                 "Mehmet",
                 "Genc",
                 "mehmetgenc",
-                "123456",
                 Gender.MALE,
                 10.0,
                 10.0);
