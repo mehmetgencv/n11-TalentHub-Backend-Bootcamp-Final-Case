@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -18,12 +20,13 @@ public class Review {
     @ManyToOne
     private User user;
 
+    @NotBlank(message = "Restaurant Id is mandatory")
     @Column(name = "RESTAURANT_ID", nullable = false)
-    Long restaurantId;
+    private Long restaurantId;
 
     @Column(name = "COMMENT", length = 100)
     private String comment;
-
+    @NotNull(message = "Rate is mandatory")
     @Column(name = "RATE", length = 10, nullable = false)
     private Rate rate;
 }
