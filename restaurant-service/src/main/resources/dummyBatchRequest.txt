@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "name": "Restaurant A",
     "address": "Address A",
     "latitude": 40.7128,
@@ -9,6 +10,7 @@
     "description": "Description for Restaurant A"
   },
   {
+    "id": "2",
     "name": "Restaurant B",
     "address": "Address B",
     "latitude": 34.0522,
@@ -18,6 +20,7 @@
     "description": "Description for Restaurant B"
   },
   {
+    "id": "3",
     "name": "Restaurant C",
     "address": "Address C",
     "latitude": 51.5074,
@@ -27,6 +30,7 @@
     "description": "Description for Restaurant C"
   },
   {
+    "id": "4",
     "name": "Restaurant D",
     "address": "Address D",
     "latitude": 35.6895,
@@ -36,6 +40,7 @@
     "description": "Description for Restaurant D"
   },
   {
+    "id": "5",
     "name": "Restaurant E",
     "address": "Address E",
     "latitude": 48.8566,
@@ -45,6 +50,7 @@
     "description": "Description for Restaurant E"
   },
   {
+    "id": "6",
     "name": "Restaurant F",
     "address": "Address F",
     "latitude": 55.7558,

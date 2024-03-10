@@ -25,25 +25,25 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public ResponseEntity<RestResponse<List<RestaurantDTO>>> getAllRestaurants(){
-        List<RestaurantDTO> restaurantDtoList = restaurantControllerContract.getAll();
+    public ResponseEntity<RestResponse<Iterable<RestaurantDTO>>> getAllRestaurants(){
+        Iterable<RestaurantDTO> restaurantDtoList = restaurantControllerContract.getAll();
         return ResponseEntity.ok(RestResponse.of(restaurantDtoList));
     }
 
     @GetMapping("/{restaurantId}")
-    public ResponseEntity<RestResponse<RestaurantDTO>> getRestaurantById(@PathVariable Long restaurantId){
+    public ResponseEntity<RestResponse<RestaurantDTO>> getRestaurantById(@PathVariable String restaurantId){
         RestaurantDTO restaurantDto = restaurantControllerContract.getById(restaurantId);
         return ResponseEntity.ok(RestResponse.of(restaurantDto));
     }
 
     @DeleteMapping("/{restaurantId}")
-    public ResponseEntity<RestResponse<String>> deleteRestaurantById(@PathVariable Long restaurantId){
+    public ResponseEntity<RestResponse<String>> deleteRestaurantById(@PathVariable String restaurantId){
         restaurantControllerContract.delete(restaurantId);
         return ResponseEntity.ok(RestResponse.of("Restaurant deleted"));
     }
 
     @PostMapping("/updateRate/{restaurantId}")
-    public ResponseEntity<RestResponse<RestaurantDTO>> updateRateRestaurant(@PathVariable Long restaurantId, @RequestParam Double rate){
+    public ResponseEntity<RestResponse<RestaurantDTO>> updateRateRestaurant(@PathVariable String restaurantId, @RequestParam Double rate){
         RestaurantDTO restaurantDto = restaurantControllerContract.updateRate(restaurantId, rate);
         return ResponseEntity.ok(RestResponse.of(restaurantDto));
     }

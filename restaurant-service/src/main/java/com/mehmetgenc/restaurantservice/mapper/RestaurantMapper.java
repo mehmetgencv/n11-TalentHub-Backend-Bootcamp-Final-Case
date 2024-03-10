@@ -21,7 +21,7 @@ public interface RestaurantMapper {
 
     RestaurantDTO convertToRestaurantDTO(Restaurant restaurant);
 
-    List<RestaurantDTO> convertToRestaurantDTOList(List<Restaurant> restaurantList);
+    List<RestaurantDTO> convertToRestaurantDTOList(Iterable<Restaurant> restaurantList);
 
     List<Restaurant> convertToRestaurantList(List<RestaurantSaveRequest> restaurantSaveRequestList);
 }

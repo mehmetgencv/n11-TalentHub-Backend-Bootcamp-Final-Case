@@ -7,13 +7,13 @@ import java.util.List;
 public interface RestaurantService {
     Restaurant save(Restaurant restaurant);
 
-    List<Restaurant> getAll();
+    Iterable<Restaurant> getAll();
 
-    Restaurant getById(Long restaurantId);
+    Restaurant getById(String restaurantId);
 
-    void delete(Long restaurantId);
+    void delete(String restaurantId);
 
-    Restaurant updateRate(Long restaurantId, Double rate);
+    Restaurant updateRate(String restaurantId, Double rate);
 
     List<Restaurant> saveBatch(List<Restaurant> restaurantList);
 }

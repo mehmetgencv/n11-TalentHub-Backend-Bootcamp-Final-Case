@@ -1,6 +1,7 @@
 package com.mehmetgenc.restaurantservice.dto;
 
 public record RestaurantSaveRequest(
+        String id,
         String name,
         String address,
 

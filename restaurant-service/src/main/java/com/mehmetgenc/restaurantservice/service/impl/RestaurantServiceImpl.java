@@ -20,23 +20,23 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> getAll() {
+    public Iterable<Restaurant> getAll() {
         return restaurantRepository.findAll();
     }
 
     @Override
-    public Restaurant getById(Long restaurantId) {
+    public Restaurant getById(String restaurantId) {
         return restaurantRepository.findById(restaurantId).orElseThrow(
                 () -> new RestaurantNotFoundException("Restaurant not found"));
     }
 
     @Override
-    public void delete(Long restaurantId) {
+    public void delete(String restaurantId) {
         restaurantRepository.deleteById(restaurantId);
     }
 
     @Override
-    public Restaurant updateRate(Long restaurantId, Double rate) {
+    public Restaurant updateRate(String restaurantId, Double rate) {
         Restaurant restaurant = getById(restaurantId);
         Double currentRate = restaurant.getRate();
         if(currentRate != null){
@@ -48,7 +48,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<Restaurant> saveBatch(List<Restaurant> restaurantList) {
-        return restaurantRepository.saveAll(restaurantList);
+        return (List<Restaurant>) restaurantRepository.saveAll(restaurantList);
     }
 
 

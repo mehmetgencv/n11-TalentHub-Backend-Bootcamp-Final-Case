@@ -1,7 +1,7 @@
 package com.mehmetgenc.restaurantservice.dto;
 
 public record RestaurantDTO(
-        Long id,
+        String id,
         String name,
         Double rate,
         String address,

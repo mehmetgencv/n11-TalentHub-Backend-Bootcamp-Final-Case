@@ -26,23 +26,23 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
 
     @Override
     public List<RestaurantDTO> getAll() {
-        List<Restaurant> restaurantList = restaurantService.getAll();
+        Iterable<Restaurant> restaurantList = restaurantService.getAll();
         return RestaurantMapper.INSTANCE.convertToRestaurantDTOList(restaurantList);
     }
 
     @Override
-    public RestaurantDTO getById(Long restaurantId) {
+    public RestaurantDTO getById(String restaurantId) {
         Restaurant restaurant = restaurantService.getById(restaurantId);
         return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
     }
 
     @Override
-    public void delete(Long restaurantId) {
+    public void delete(String restaurantId) {
         restaurantService.delete(restaurantId);
     }
 
     @Override
-    public RestaurantDTO updateRate(Long restaurantId, Double rate) {
+    public RestaurantDTO updateRate(String restaurantId, Double rate) {
         Restaurant restaurant = restaurantService.updateRate(restaurantId, rate);
         return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
     }

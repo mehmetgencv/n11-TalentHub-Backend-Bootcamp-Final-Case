@@ -10,11 +10,11 @@ public interface RestaurantControllerContract {
 
     List<RestaurantDTO> getAll();
 
-    RestaurantDTO getById(Long restaurantId);
+    RestaurantDTO getById(String restaurantId);
 
-    void delete(Long restaurantId);
+    void delete(String restaurantId);
 
-    RestaurantDTO updateRate(Long restaurantId, Double rate);
+    RestaurantDTO updateRate(String restaurantId, Double rate);
 
     List<RestaurantDTO> saveBatch(List<RestaurantSaveRequest> restaurantSaveRequestList);
 }
