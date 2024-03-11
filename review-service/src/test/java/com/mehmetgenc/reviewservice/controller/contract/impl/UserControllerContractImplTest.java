@@ -53,9 +53,9 @@ class UserControllerContractImplTest {
         final UserDTO result = userControllerContractImplUnderTest.save(userSaveRequest);
 
         // then
-        assertEquals(result.name(), userSaveRequest.name());
-        assertEquals(result.surname(), userSaveRequest.surname());
-        assertEquals(result.email(), userSaveRequest.email());
+        assertEquals(userSaveRequest.name(), result.name());
+        assertEquals(userSaveRequest.surname(), result.surname());
+        assertEquals(userSaveRequest.email(), result.email());
 
     }
 
@@ -70,9 +70,9 @@ class UserControllerContractImplTest {
         UserDTO result = userControllerContractImplUnderTest.findById(userId);
 
         // then
-        assertEquals(result.name(), user.getName());
-        assertEquals(result.surname(), user.getSurname());
-        assertEquals(result.email(), user.getEmail());
+        assertEquals(user.getName(), result.name());
+        assertEquals(user.getSurname(), result.surname());
+        assertEquals(user.getEmail(), result.email());
 
     }
 
@@ -100,9 +100,9 @@ class UserControllerContractImplTest {
         List<UserDTO> result = userControllerContractImplUnderTest.findAll();
 
         // then
-        assertEquals(result.get(0).name(), user.getName());
-        assertEquals(result.get(0).surname(), user.getSurname());
-        assertEquals(result.get(0).email(), user.getEmail());
+        assertEquals(user.getName(), result.get(0).name() );
+        assertEquals(user.getSurname(), result.get(0).surname());
+        assertEquals(user.getEmail(), result.get(0).email());
     }
 
     @Test
@@ -115,7 +115,7 @@ class UserControllerContractImplTest {
         List<UserDTO> result = userControllerContractImplUnderTest.findAll();
 
         // then
-        assertThat(result).isEqualTo(Collections.emptyList());
+        assertThat(Collections.emptyList()).isEqualTo(result);
     }
 
     @Test
@@ -128,7 +128,7 @@ class UserControllerContractImplTest {
         String result = userControllerContractImplUnderTest.delete(userId);
 
         // then
-        assertEquals(result, expectedResult);
+        assertEquals(expectedResult, result);
     }
 
     @Test
@@ -144,9 +144,9 @@ class UserControllerContractImplTest {
         UserDTO result = userControllerContractImplUnderTest.update(0L, userUpdateRequest);
 
         // then
-        assertEquals(result.name(), userUpdateRequest.name());
-        assertEquals(result.surname(), userUpdateRequest.surname());
-        assertEquals(result.email(), userUpdateRequest.email());
+        assertEquals(userUpdateRequest.name(), result.name());
+        assertEquals(userUpdateRequest.surname(), result.surname());
+        assertEquals(userUpdateRequest.email(), result.email());
     }
 
     @Test
@@ -162,8 +162,8 @@ class UserControllerContractImplTest {
         final List<UserDTO> result = userControllerContractImplUnderTest.saveBatch(userSaveRequestList);
 
         // then
-        assertEquals(result.get(0).name(), userSaveRequestList.get(0).name());
-        assertEquals(result.get(0).surname(), userSaveRequestList.get(0).surname());
+        assertEquals(userSaveRequestList.get(0).name(), result.get(0).name());
+        assertEquals(userSaveRequestList.get(0).surname(), result.get(0).surname());
     }
 
 
