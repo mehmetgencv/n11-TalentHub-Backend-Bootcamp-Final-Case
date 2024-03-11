@@ -154,7 +154,7 @@ class UserControllerTest extends BaseControllerTest {
         UserUpdateRequest userUpdateRequest = new UserUpdateRequest(
                 "Mehmet",
                 "Genc",
-                "mehmetgenc",
+                "mehmetgenc@mehmet.com",
                 Gender.MALE,
                 10.0,
                 10.0);
@@ -204,8 +204,8 @@ class UserControllerTest extends BaseControllerTest {
         UserSaveRequest userSaveRequest = new UserSaveRequest(
                 "Mehmet",
                 "Genc",
-                "mehmetgenc",
-                Gender.FEMALE,
+                "mehmetgenc@mehmet.com",
+                Gender.MALE,
                 10.0,
                 10.0
         );
@@ -217,7 +217,7 @@ class UserControllerTest extends BaseControllerTest {
                 1L,
                 "Mehmet",
                 "Genc",
-                "mehmetgenc");
+                "mehmetgenc@mehmet.com");
         return userDTO;
     }
 
