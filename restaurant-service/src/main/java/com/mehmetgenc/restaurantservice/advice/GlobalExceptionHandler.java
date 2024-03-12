@@ -4,6 +4,7 @@ package com.mehmetgenc.restaurantservice.advice;
 import com.mehmetgenc.restaurantservice.exception.RestaurantNotFoundException;
 import com.mehmetgenc.restaurantservice.exception.RestaurantServiceException;
 import com.mehmetgenc.restaurantservice.general.GeneralErrorMessages;
+import com.mehmetgenc.restaurantservice.general.KafkaProducerService;
 import com.mehmetgenc.restaurantservice.general.RestResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,19 @@ import java.time.LocalDateTime;
 @RestController
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    private final KafkaProducerService kafkaProducerService;
+
+    public GlobalExceptionHandler(KafkaProducerService kafkaProducerService) {
+        this.kafkaProducerService = kafkaProducerService;
+    }
+
     @ExceptionHandler
     public ResponseEntity<Object> handleRestaurantNotFoundException(RestaurantNotFoundException exception, WebRequest request){
         String message = exception.getMessage();
         String description = request.getDescription(false);
         GeneralErrorMessages generalErrorMessages = new GeneralErrorMessages(LocalDateTime.now(), message, description);
         RestResponse restResponse = RestResponse.error(generalErrorMessages);
+        kafkaProducerService.sendMessage("errorLog", message);
         return new ResponseEntity<>(restResponse, HttpStatus.NOT_FOUND);
     }
 
@@ -36,6 +44,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         GeneralErrorMessages generalErrorMessages = new GeneralErrorMessages(LocalDateTime.now(), message, description);
         RestResponse restResponse = RestResponse.error(generalErrorMessages);
+        kafkaProducerService.sendMessage("errorLog", message);
         return new ResponseEntity<>(restResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -46,6 +55,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         GeneralErrorMessages generalErrorMessages = new GeneralErrorMessages(LocalDateTime.now(), message, description);
         RestResponse restResponse = RestResponse.error(generalErrorMessages);
+        kafkaProducerService.sendMessage("errorLog", message);
         return new ResponseEntity<>(restResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -56,6 +66,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         GeneralErrorMessages generalErrorMessages = new GeneralErrorMessages(LocalDateTime.now(), message, description);
         RestResponse restResponse = RestResponse.error(generalErrorMessages);
+        kafkaProducerService.sendMessage("errorLog", message);
         return new ResponseEntity<>(restResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
