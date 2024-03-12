@@ -6,6 +6,7 @@ import com.mehmetgenc.reviewservice.controller.contract.ReviewControllerContract
 import com.mehmetgenc.reviewservice.dto.ReviewDTO;
 import com.mehmetgenc.reviewservice.entity.enums.Rate;
 import com.mehmetgenc.reviewservice.exception.ReviewNotFoundException;
+import com.mehmetgenc.reviewservice.general.KafkaProducerService;
 import com.mehmetgenc.reviewservice.request.ReviewSaveRequest;
 import com.mehmetgenc.reviewservice.request.ReviewUpdateRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +26,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,6 +36,9 @@ class ReviewControllerTest extends BaseControllerTest{
 
     @MockBean
     private ReviewControllerContract reviewControllerContract;
+
+    @MockBean
+    private KafkaProducerService kafkaProducerService;
 
     @Autowired
     private WebApplicationContext context;
@@ -53,6 +59,7 @@ class ReviewControllerTest extends BaseControllerTest{
         ReviewSaveRequest reviewSaveRequest = getExampleReviewSaveRequest();
         ReviewDTO reviewDTO = getExampleReviewDTO();
         when(reviewControllerContract.save(reviewSaveRequest)).thenReturn(reviewDTO);
+        doNothing().when(kafkaProducerService).sendMessage(anyString(), anyString());
 
         //when
 
@@ -139,7 +146,7 @@ class ReviewControllerTest extends BaseControllerTest{
     void shouldDeleteReviewById() throws Exception {
         //given
         when(reviewControllerContract.deleteById(1L)).thenReturn(true);
-
+        doNothing().when(kafkaProducerService).sendMessage(anyString(), anyString());
         //when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/reviews/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -155,6 +162,8 @@ class ReviewControllerTest extends BaseControllerTest{
         //given
         ReviewDTO reviewDTO = getExampleReviewDTO();
         when(reviewControllerContract.updateComment(1L, "new comment")).thenReturn(reviewDTO);
+        doNothing().when(kafkaProducerService).sendMessage(anyString(), anyString());
+
         String comment = "new comment";
         //when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/reviews/updateComment/1")
@@ -174,6 +183,7 @@ class ReviewControllerTest extends BaseControllerTest{
         //given
         ReviewDTO reviewDTO = getExampleReviewDTO();
         when(reviewControllerContract.updateRating(1L, Rate.FOUR)).thenReturn(reviewDTO);
+        doNothing().when(kafkaProducerService).sendMessage(anyString(), anyString());
 
         //when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/reviews/updateRating/1")
@@ -193,6 +203,7 @@ class ReviewControllerTest extends BaseControllerTest{
         //given
         ReviewDTO reviewDTO = getExampleReviewDTO();
         when(reviewControllerContract.updateReview(1L, getExampleReviewUpdateRequest())).thenReturn(reviewDTO);
+        doNothing().when(kafkaProducerService).sendMessage(anyString(), anyString());
 
         //when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/reviews/updateReview/1")

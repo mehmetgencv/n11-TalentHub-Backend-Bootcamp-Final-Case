@@ -6,12 +6,14 @@ import com.mehmetgenc.reviewservice.controller.contract.UserControllerContract;
 import com.mehmetgenc.reviewservice.dto.UserDTO;
 import com.mehmetgenc.reviewservice.entity.enums.Gender;
 import com.mehmetgenc.reviewservice.exception.UserNotFoundException;
+import com.mehmetgenc.reviewservice.general.KafkaProducerService;
 import com.mehmetgenc.reviewservice.request.UserSaveRequest;
 import com.mehmetgenc.reviewservice.request.UserUpdateRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -29,6 +31,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,6 +41,9 @@ class UserControllerTest extends BaseControllerTest {
 
     @MockBean
     private UserControllerContract userControllerContract;
+
+    @MockBean
+    private KafkaProducerService kafkaProducerService;
 
     @Autowired
     private WebApplicationContext context;
@@ -60,6 +67,7 @@ class UserControllerTest extends BaseControllerTest {
 
         //when
         when(userControllerContract.save(userSaveRequest)).thenReturn(userDTO);
+        doNothing().when(kafkaProducerService).sendMessage(anyString(), anyString());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -137,6 +145,7 @@ class UserControllerTest extends BaseControllerTest {
 
         //when
         when(userControllerContract.delete(1L)).thenReturn(message);
+        doNothing().when(kafkaProducerService).sendMessage(anyString(), anyString());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/users/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -163,6 +172,7 @@ class UserControllerTest extends BaseControllerTest {
 
         //when
         when(userControllerContract.update(1L, userUpdateRequest)).thenReturn(userDTO);
+        doNothing().when(kafkaProducerService).sendMessage(anyString(), anyString());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/users/1")
                 .contentType(MediaType.APPLICATION_JSON)
