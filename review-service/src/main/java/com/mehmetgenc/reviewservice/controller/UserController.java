@@ -2,6 +2,7 @@ package com.mehmetgenc.reviewservice.controller;
 
 import com.mehmetgenc.reviewservice.controller.contract.UserControllerContract;
 import com.mehmetgenc.reviewservice.dto.UserDTO;
+import com.mehmetgenc.reviewservice.general.KafkaProducerService;
 import com.mehmetgenc.reviewservice.general.RestResponse;
 import com.mehmetgenc.reviewservice.request.UserSaveRequest;
 import com.mehmetgenc.reviewservice.request.UserUpdateRequest;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -23,15 +23,18 @@ import java.util.List;
 @Tag(name = "User Controller", description = "User Management")
 public class UserController {
     private final UserControllerContract userControllerContract;
+    private final KafkaProducerService kafkaProducerService;
 
-    public UserController(UserControllerContract userControllerContract) {
+    public UserController(UserControllerContract userControllerContract, KafkaProducerService kafkaProducerService) {
         this.userControllerContract = userControllerContract;
+        this.kafkaProducerService = kafkaProducerService;
     }
 
     @PostMapping
     @Operation(summary = "Create a new user", description = "Creates a new user with the provided details")
     public ResponseEntity<RestResponse<UserDTO>> saveUser(@RequestBody @Valid UserSaveRequest userSaveRequest){
         UserDTO userDto = userControllerContract.save(userSaveRequest);
+        kafkaProducerService.sendMessage("infoLog", "User saved with id: " + userDto.id());
         return ResponseEntity.ok(RestResponse.of(userDto));
     }
 
@@ -52,7 +55,8 @@ public class UserController {
     @DeleteMapping("/{userId}")
     @Operation(summary = "Delete user by ID", description = "Deletes a single user based on the provided ID")
     public ResponseEntity<RestResponse<String>> deleteUser(@PathVariable @Positive Long userId){
-            String message = userControllerContract.delete(userId);
+        String message = userControllerContract.delete(userId);
+        kafkaProducerService.sendMessage("infoLog", "User deleted with id: " + userId);
         return ResponseEntity.ok(RestResponse.of(message));
     }
 
@@ -60,6 +64,7 @@ public class UserController {
     @Operation(summary = "Update user by ID", description = "Updates a single user based on the provided ID")
     public ResponseEntity<RestResponse<UserDTO>> updateUser(@PathVariable @Positive Long userId, @RequestBody @Valid UserUpdateRequest userUpdateRequest){
         UserDTO userDto = userControllerContract.update(userId, userUpdateRequest);
+        kafkaProducerService.sendMessage("infoLog", "User updated with id: " + userId);
         return ResponseEntity.ok(RestResponse.of(userDto));
     }
 

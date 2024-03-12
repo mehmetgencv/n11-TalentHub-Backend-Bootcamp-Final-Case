@@ -3,6 +3,7 @@ package com.mehmetgenc.reviewservice.controller;
 import com.mehmetgenc.reviewservice.controller.contract.ReviewControllerContract;
 import com.mehmetgenc.reviewservice.dto.ReviewDTO;
 import com.mehmetgenc.reviewservice.entity.enums.Rate;
+import com.mehmetgenc.reviewservice.general.KafkaProducerService;
 import com.mehmetgenc.reviewservice.general.RestResponse;
 import com.mehmetgenc.reviewservice.request.ReviewSaveRequest;
 import com.mehmetgenc.reviewservice.request.ReviewUpdateRequest;
@@ -23,15 +24,18 @@ import java.util.List;
 @Tag(name = "Review Controller", description = "Review Management")
 public class ReviewController {
     private final ReviewControllerContract reviewControllerContract;
+    private final KafkaProducerService kafkaProducerService;
 
-    public ReviewController(ReviewControllerContract reviewControllerContract) {
+    public ReviewController(ReviewControllerContract reviewControllerContract, KafkaProducerService kafkaProducerService) {
         this.reviewControllerContract = reviewControllerContract;
+        this.kafkaProducerService = kafkaProducerService;
     }
 
     @PostMapping
     @Operation(summary = "Create a new review", description = "Creates a new review with the provided details")
     public ResponseEntity<RestResponse<ReviewDTO>> save(@RequestBody @Valid ReviewSaveRequest productSaveRequest){
         ReviewDTO reviewDTO = reviewControllerContract.save(productSaveRequest);
+        kafkaProducerService.sendMessage("infoLog", "Review saved with id: " + reviewDTO.id());
         return ResponseEntity.ok(RestResponse.of(reviewDTO));
 
     }
@@ -64,6 +68,7 @@ public class ReviewController {
     @Operation(summary = "Delete review by Review ID", description = "Deletes a single review based on the provided ID")
     public ResponseEntity<RestResponse<Boolean>> deleteById(@PathVariable @Positive Long reviewId){
         Boolean result = reviewControllerContract.deleteById(reviewId);
+        kafkaProducerService.sendMessage("infoLog", "Review deleted with id: " + reviewId);
         return ResponseEntity.ok(RestResponse.of(result));
 
     }
@@ -72,6 +77,7 @@ public class ReviewController {
     @Operation(summary = "Update comment by Review ID", description = "Updates a single comment based on the provided ID")
     public ResponseEntity<RestResponse<ReviewDTO>> updateComment(@PathVariable @Positive Long reviewId, @RequestBody String comment){
         ReviewDTO reviewDTO = reviewControllerContract.updateComment(reviewId, comment);
+        kafkaProducerService.sendMessage("infoLog", "Review updated with id: " + reviewId);
         return ResponseEntity.ok(RestResponse.of(reviewDTO));
 
     }
@@ -80,6 +86,7 @@ public class ReviewController {
     @Operation(summary = "Update rating by Review ID", description = "Updates a single rating based on the provided ID")
     public ResponseEntity<RestResponse<ReviewDTO>> updateRating(@PathVariable @Positive Long reviewId, @RequestBody @NotNull Rate rating){
         ReviewDTO reviewDTO = reviewControllerContract.updateRating(reviewId, rating);
+        kafkaProducerService.sendMessage("infoLog", "Review updated with id: " + reviewId);
         return ResponseEntity.ok(RestResponse.of(reviewDTO));
 
     }
@@ -88,6 +95,7 @@ public class ReviewController {
     @Operation(summary = "Update review by Review ID", description = "Updates a single review based on the provided ID")
     public ResponseEntity<RestResponse<ReviewDTO>> updateReview(@PathVariable @Positive Long reviewId, @RequestBody @Valid ReviewUpdateRequest reviewUpdateRequest){
         ReviewDTO reviewDTO = reviewControllerContract.updateReview(reviewId, reviewUpdateRequest);
+        kafkaProducerService.sendMessage("infoLog", "Review updated with id: " + reviewId);
         return ResponseEntity.ok(RestResponse.of(reviewDTO));
 
     }

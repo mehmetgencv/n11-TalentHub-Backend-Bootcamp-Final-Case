@@ -4,6 +4,7 @@ import com.mehmetgenc.reviewservice.client.RestaurantServiceClient;
 import com.mehmetgenc.reviewservice.controller.contract.RestaurantControllerContract;
 import com.mehmetgenc.reviewservice.dto.RestaurantInfoDTO;
 import com.mehmetgenc.reviewservice.dto.RestaurantRecommendInfoDTO;
+import com.mehmetgenc.reviewservice.general.KafkaProducerService;
 import com.mehmetgenc.reviewservice.general.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,6 +24,7 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantControllerContract restaurantControllerContract;
+    private final KafkaProducerService kafkaProducerService;
 
     @GetMapping("/getRestaurant")
     @Operation(summary = "Get Restaurant by ID", description = "Returns a single restaurant based on the provided ID")
@@ -34,7 +36,9 @@ public class RestaurantController {
     @PatchMapping("/updateRate")
     @Operation(summary = "Update rate of the restaurant By Restaurant ID", description = "Updates a single restaurant rate based on the provided ID")
     public RestResponse<RestaurantInfoDTO> updateRate(Long restaurantId, Double rate) {
-        return restaurantControllerContract.updateRate(restaurantId, rate);
+        RestResponse<RestaurantInfoDTO> restaurantInfoDTORestResponse = restaurantControllerContract.updateRate(restaurantId, rate);
+        kafkaProducerService.sendMessage("infoLog", "Restaurant rate updated with id: " + restaurantId);
+        return restaurantInfoDTORestResponse;
     }
 
     @GetMapping
