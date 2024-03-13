@@ -19,7 +19,7 @@ import java.util.List;
 public class RecommendationController {
     private final RecommendationControllerContract recommendationControllerContract;
 
-    @GetMapping("/recommendations/{userId}")
+    @GetMapping("/{userId}")
     @Operation(summary = "Get Recommendations by User ID", description = "Returns a list of recommended restaurants based on the provided user ID")
     public ResponseEntity<RestResponse<List<RestaurantRecommendInfoDTO>>> getRecommendations(@PathVariable Long userId) {
         List<RestaurantRecommendInfoDTO> recommendations = recommendationControllerContract.getRecommendations(userId);
