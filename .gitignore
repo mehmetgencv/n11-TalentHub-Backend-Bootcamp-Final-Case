@@ -35,3 +35,4 @@ build/
 /data/
 /postgres-data/
 /solr-data/
+/logging-service/postgres-data/
