@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping("/api/v1/users")
 @Validated
 @Tag(name = "User Controller", description = "User Management")
+@CrossOrigin("http://localhost:3000")
 public class UserController {
     private final UserControllerContract userControllerContract;
     private final KafkaProducerService kafkaProducerService;
