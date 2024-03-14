@@ -2,7 +2,6 @@ package com.mehmetgenc.reviewservice.request;
 
 import com.mehmetgenc.reviewservice.entity.enums.Rate;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 

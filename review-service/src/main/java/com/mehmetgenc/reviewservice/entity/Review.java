@@ -20,7 +20,7 @@ public class Review {
     @ManyToOne
     private User user;
 
-    @NotBlank(message = "Restaurant Id is mandatory")
+    @NotNull(message = "Restaurant Id is mandatory")
     @Column(name = "RESTAURANT_ID", nullable = false)
     private Long restaurantId;
 
