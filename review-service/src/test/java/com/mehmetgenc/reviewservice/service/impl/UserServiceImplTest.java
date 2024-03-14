@@ -2,6 +2,7 @@ package com.mehmetgenc.reviewservice.service.impl;
 
 import com.mehmetgenc.reviewservice.entity.User;
 import com.mehmetgenc.reviewservice.entity.enums.Gender;
+import com.mehmetgenc.reviewservice.exception.UserExistException;
 import com.mehmetgenc.reviewservice.exception.UserNotFoundException;
 import com.mehmetgenc.reviewservice.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,9 +36,9 @@ class UserServiceImplTest {
 
     @Test
     void testSave() {
-        // given
+       //given
         final User user = createExampleUser();
-
+        when(mockUserRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
         when(mockUserRepository.save(any(User.class))).thenReturn(user);
 
         // when
@@ -45,6 +46,17 @@ class UserServiceImplTest {
 
         // then
         assertEquals(user.getEmail(), result.getEmail());
+        assertEquals(user.getName(), result.getName());
+    }
+
+    @Test
+    void testSave_shouldThrowUserExistException() {
+        //given
+        final User user = createExampleUser();
+        when(mockUserRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
+
+        // Run the test
+        assertThatThrownBy(() -> userServiceImplUnderTest.save(user)).isInstanceOf(UserExistException.class);
     }
 
     @Test
