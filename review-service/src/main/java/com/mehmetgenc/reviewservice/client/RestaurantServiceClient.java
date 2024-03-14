@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@FeignClient(value = "restaurantService", url = "http://localhost:8081/api/v1/restaurants")
+@FeignClient(value = "restaurantService", url = "${restaurant.service.url}")
 public interface RestaurantServiceClient {
 
     @GetMapping("/{userId}")
