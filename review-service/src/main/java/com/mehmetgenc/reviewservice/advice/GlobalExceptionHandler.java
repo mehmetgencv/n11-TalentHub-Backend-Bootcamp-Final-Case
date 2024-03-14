@@ -2,6 +2,7 @@ package com.mehmetgenc.reviewservice.advice;
 
 import com.mehmetgenc.reviewservice.exception.ReviewNotFoundException;
 import com.mehmetgenc.reviewservice.exception.ReviewServiceException;
+import com.mehmetgenc.reviewservice.exception.UserExistException;
 import com.mehmetgenc.reviewservice.exception.UserNotFoundException;
 import com.mehmetgenc.reviewservice.general.GeneralErrorMessages;
 import com.mehmetgenc.reviewservice.general.KafkaProducerService;
@@ -61,6 +62,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         String message = ex.getBindingResult().getFieldError().getDefaultMessage();
         String description = request.getDescription(false);
+        GeneralErrorMessages generalErrorMessages = new GeneralErrorMessages(LocalDateTime.now(), message, description);
+        RestResponse restResponse = RestResponse.error(generalErrorMessages);
+        kafkaProducerService.sendMessage("errorLog", message);
+        return new ResponseEntity<>(restResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleUserExistException(UserExistException e, WebRequest request){
+        String message = e.getMessage();
+        String description = request.getDescription(false);
+
         GeneralErrorMessages generalErrorMessages = new GeneralErrorMessages(LocalDateTime.now(), message, description);
         RestResponse restResponse = RestResponse.error(generalErrorMessages);
         kafkaProducerService.sendMessage("errorLog", message);

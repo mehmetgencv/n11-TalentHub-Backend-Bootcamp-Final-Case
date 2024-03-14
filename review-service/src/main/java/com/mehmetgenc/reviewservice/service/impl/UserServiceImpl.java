@@ -1,6 +1,7 @@
 package com.mehmetgenc.reviewservice.service.impl;
 
 import com.mehmetgenc.reviewservice.entity.User;
+import com.mehmetgenc.reviewservice.exception.UserExistException;
 import com.mehmetgenc.reviewservice.exception.UserNotFoundException;
 import com.mehmetgenc.reviewservice.repository.UserRepository;
 import com.mehmetgenc.reviewservice.service.UserService;
@@ -19,6 +20,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
+        userRepository.findByEmail(user.getEmail()).ifPresent(u -> {
+            throw new UserExistException("User already exists");
+        });
+
         return userRepository.save(user);
     }
 
