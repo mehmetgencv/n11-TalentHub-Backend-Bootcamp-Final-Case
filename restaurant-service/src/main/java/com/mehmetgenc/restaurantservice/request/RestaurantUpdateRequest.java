@@ -1,9 +1,11 @@
-package com.mehmetgenc.restaurantservice.dto;
+package com.mehmetgenc.restaurantservice.request;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-public record RestaurantSaveRequest(
-        String id,
+public record RestaurantUpdateRequest(
 
         @NotBlank(message = "Name is mandatory")
         String name,

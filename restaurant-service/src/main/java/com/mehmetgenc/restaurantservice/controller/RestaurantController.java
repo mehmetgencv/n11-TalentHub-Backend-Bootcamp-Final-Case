@@ -2,9 +2,10 @@ package com.mehmetgenc.restaurantservice.controller;
 
 import com.mehmetgenc.restaurantservice.controller.contract.RestaurantControllerContract;
 import com.mehmetgenc.restaurantservice.dto.RestaurantDTO;
-import com.mehmetgenc.restaurantservice.dto.RestaurantSaveRequest;
+import com.mehmetgenc.restaurantservice.request.RestaurantSaveRequest;
 import com.mehmetgenc.restaurantservice.general.KafkaProducerService;
 import com.mehmetgenc.restaurantservice.general.RestResponse;
+import com.mehmetgenc.restaurantservice.request.RestaurantUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,14 @@ public class RestaurantController {
     public ResponseEntity<RestResponse<Iterable<RestaurantDTO>>> getAllRestaurants(){
         Iterable<RestaurantDTO> restaurantDtoList = restaurantControllerContract.getAll();
         return ResponseEntity.ok(RestResponse.of(restaurantDtoList));
+    }
+
+    @PutMapping("/{restaurantId}")
+    @Operation(summary = "Update Restaurant by ID", description = "Updates a single restaurant based on the provided ID")
+    public ResponseEntity<RestResponse<RestaurantDTO>> updateRestaurant(@PathVariable String restaurantId, @RequestBody @Valid RestaurantUpdateRequest restaurantUpdateRequest){
+        RestaurantDTO restaurantDto = restaurantControllerContract.update(restaurantId, restaurantUpdateRequest);
+        kafkaProducerService.sendMessage("infoLog", "Restaurant updated with id: " + restaurantDto.id());
+        return ResponseEntity.ok(RestResponse.of(restaurantDto));
     }
 
     @GetMapping("/{restaurantId}")

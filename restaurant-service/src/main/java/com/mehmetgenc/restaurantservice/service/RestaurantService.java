@@ -16,4 +16,6 @@ public interface RestaurantService {
     Restaurant updateRate(String restaurantId, Double rate);
 
     List<Restaurant> saveBatch(List<Restaurant> restaurantList);
+
+    Restaurant update(String restaurantId, Restaurant restaurant);
 }

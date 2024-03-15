@@ -2,9 +2,10 @@ package com.mehmetgenc.restaurantservice.controller.contract.impl;
 
 import com.mehmetgenc.restaurantservice.controller.contract.RestaurantControllerContract;
 import com.mehmetgenc.restaurantservice.dto.RestaurantDTO;
-import com.mehmetgenc.restaurantservice.dto.RestaurantSaveRequest;
+import com.mehmetgenc.restaurantservice.request.RestaurantSaveRequest;
 import com.mehmetgenc.restaurantservice.entity.Restaurant;
 import com.mehmetgenc.restaurantservice.mapper.RestaurantMapper;
+import com.mehmetgenc.restaurantservice.request.RestaurantUpdateRequest;
 import com.mehmetgenc.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,13 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
         List<Restaurant> restaurantList = RestaurantMapper.INSTANCE.convertToRestaurantList(restaurantSaveRequestList);
         restaurantList = restaurantService.saveBatch(restaurantList);
         return RestaurantMapper.INSTANCE.convertToRestaurantDTOList(restaurantList);
+    }
+
+    @Override
+    public RestaurantDTO update(String restaurantId, RestaurantUpdateRequest restaurantUpdateRequest) {
+        Restaurant restaurant = RestaurantMapper.INSTANCE.convertToRestaurant(restaurantUpdateRequest);
+        restaurant = restaurantService.update(restaurantId, restaurant);
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
+
     }
 }

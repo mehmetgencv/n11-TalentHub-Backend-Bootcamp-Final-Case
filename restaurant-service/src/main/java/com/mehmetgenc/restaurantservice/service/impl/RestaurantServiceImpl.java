@@ -51,5 +51,17 @@ public class RestaurantServiceImpl implements RestaurantService {
         return (List<Restaurant>) restaurantRepository.saveAll(restaurantList);
     }
 
+    @Override
+    public Restaurant update(String restaurantId, Restaurant restaurant) {
+        Restaurant restaurantFromDb = getById(restaurantId);
+        restaurantFromDb.setName(restaurant.getName());
+        restaurantFromDb.setAddress(restaurant.getAddress());
+        restaurantFromDb.setEmail(restaurant.getEmail());
+        restaurantFromDb.setPhone(restaurant.getPhone());
+        restaurantFromDb.setLatitude(restaurant.getLatitude());
+        restaurantFromDb.setLongitude(restaurant.getLongitude());
+        return restaurantRepository.save(restaurantFromDb);
+    }
+
 
 }
