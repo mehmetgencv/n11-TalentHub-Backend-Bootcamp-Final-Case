@@ -17,7 +17,6 @@ public interface RestaurantMapper {
 
     RestaurantMapper INSTANCE = Mappers.getMapper(RestaurantMapper.class);
 
-
     Restaurant convertToRestaurant(RestaurantSaveRequest restaurantSaveRequest);
 
     RestaurantDTO convertToRestaurantDTO(Restaurant restaurant);

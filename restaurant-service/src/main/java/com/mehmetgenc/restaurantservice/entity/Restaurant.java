@@ -65,5 +65,6 @@ public class Restaurant {
     }
 
     public Restaurant() {
+        this.id = String.valueOf(ID_GENERATOR.incrementAndGet());
     }
 }
