@@ -14,11 +14,10 @@ public record RestaurantSaveRequest(
         @NotNull(message = "Longitude is mandatory")
         Double longitude,
 
-        @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+
         @NotBlank(message = "Phone is mandatory")
         String phone,
 
         @NotBlank(message = "Email is mandatory")
-        @Email(message = "Email should be valid")
         String email
 ) {}
