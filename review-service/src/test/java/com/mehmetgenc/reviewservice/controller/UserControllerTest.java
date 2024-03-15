@@ -227,7 +227,10 @@ class UserControllerTest extends BaseControllerTest {
                 1L,
                 "Mehmet",
                 "Genc",
-                "mehmetgenc@mehmet.com");
+                "mehmetgenc@mehmet.com",
+                Gender.MALE,
+                10.0,
+                10.0);
         return userDTO;
     }
 
