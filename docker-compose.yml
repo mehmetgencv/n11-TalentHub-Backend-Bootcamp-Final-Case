@@ -91,6 +91,7 @@ services:
       - SOLR_CORE_NAME=restaurant-service
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SOLR_SERVICE_URL=http://solr:8983/solr
+      - SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS=kafka:9092
     networks:
       - app-network
 
@@ -110,6 +111,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=postgres
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - RESTAURANT_SERVICE_URL=http://restaurant-service:8081/api/v1/restaurants
+      - SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS=kafka:9092
     networks:
       - app-network
 
@@ -128,6 +130,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS=kafka:9092
     networks:
       - app-network
 
