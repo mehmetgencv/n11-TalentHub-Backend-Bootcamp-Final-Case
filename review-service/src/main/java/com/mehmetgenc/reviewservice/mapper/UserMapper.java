@@ -28,7 +28,7 @@ public interface UserMapper {
     List<UserDTO> convertToUserDTOs(List<User> users);
 
     @Mapping(target = "id", ignore = true)
-    void updateCustomerFields(@MappingTarget User user, UserUpdateRequest request);
+    User updateCustomerFields(@MappingTarget User user, UserUpdateRequest request);
 
     UserLocationDTO convertToUserLocationDTO(User user);
 

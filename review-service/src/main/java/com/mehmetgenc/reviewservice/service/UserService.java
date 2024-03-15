@@ -15,4 +15,6 @@ public interface UserService {
 
 
     List<User> saveBatch(List<User> users);
+
+    User update(User user);
 }

@@ -138,7 +138,7 @@ class UserControllerContractImplTest {
         User user = createExampleUser();
 
         when(mockUserService.findById(anyLong())).thenReturn(user);
-        when(mockUserService.save(any(User.class))).thenReturn(user);
+        when(mockUserService.update(any(User.class))).thenReturn(user);
 
         // when
         UserDTO result = userControllerContractImplUnderTest.update(0L, userUpdateRequest);

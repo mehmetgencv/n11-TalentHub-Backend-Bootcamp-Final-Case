@@ -45,8 +45,8 @@ public class UserControllerContractImpl implements UserControllerContract {
     @Override
     public UserDTO update(Long userId, UserUpdateRequest userUpdateRequest) {
         User user = userService.findById(userId);
-        UserMapper.INSTANCE.updateCustomerFields(user, userUpdateRequest);
-        userService.save(user);
+        user = UserMapper.INSTANCE.updateCustomerFields(user, userUpdateRequest);
+        user = userService.update(user);
         return UserMapper.INSTANCE.convertToUserDto(user);
     }
 
