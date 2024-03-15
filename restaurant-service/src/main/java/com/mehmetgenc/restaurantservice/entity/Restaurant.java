@@ -1,8 +1,6 @@
 package com.mehmetgenc.restaurantservice.entity;
 
-
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import nonapi.io.github.classgraph.json.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
@@ -11,16 +9,17 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-
+import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 @SolrDocument(solrCoreName = "restaurant-service")
 public class Restaurant {
+    private static final AtomicLong ID_GENERATOR = new AtomicLong(0);
+
     @Id
     @Indexed(name = "id", type = "string")
-    private String  id;
+    private String id;
 
     @NotBlank(message = "Name is mandatory")
     @Indexed(name = "name", type = "string")
@@ -51,6 +50,7 @@ public class Restaurant {
     private double longitude;
 
     public Restaurant(String name, String address, String phone, String email, Double rate, double latitude, double longitude) {
+        this.id = String.valueOf(ID_GENERATOR.incrementAndGet());
         this.name = name;
         this.address = address;
         this.phone = phone;
