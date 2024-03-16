@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api/v1/restaurants")
 @Validated
 @Tag(name = "Restaurant Controller", description = "Restaurant Management")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("${cross.origin.url}")
 public class RestaurantController {
     private final RestaurantControllerContract restaurantControllerContract;
     private final KafkaProducerService kafkaProducerService;

@@ -92,6 +92,7 @@ services:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SOLR_SERVICE_URL=http://solr:8983/solr
       - SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS=kafka:9092
+      - CROSS_ORIGIN_URL=http://localhost:3000
     networks:
       - app-network
 
@@ -112,6 +113,7 @@ services:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - RESTAURANT_SERVICE_URL=http://restaurant-service:8081/api/v1/restaurants
       - SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS=kafka:9092
+      - CROSS_ORIGIN_URL=http://localhost:3000
     networks:
       - app-network
 
@@ -131,9 +133,11 @@ services:
       - SPRING_DATASOURCE_PASSWORD=postgres
       - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS=kafka:9092
+      - CROSS_ORIGIN_URL=http://localhost:3000
     networks:
       - app-network
 
 networks:
   app-network:
+    name: n11-final-network
     driver: bridge

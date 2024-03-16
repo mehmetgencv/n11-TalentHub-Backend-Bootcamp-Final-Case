@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/api/v1/reviews")
 @Validated
 @Tag(name = "Review Controller", description = "Review Management")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("${cross.origin.url}")
 public class ReviewController {
     private final ReviewControllerContract reviewControllerContract;
     private final KafkaProducerService kafkaProducerService;
