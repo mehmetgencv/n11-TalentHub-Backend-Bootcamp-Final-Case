@@ -25,6 +25,9 @@ This project aims to provide a platform where users can comment on restaurants a
 - Creation, update, and deletion of user comments.
 - An API providing recommendations to users.
 
+This project has a frontend part you can find [n11 TalentHub Backend Bootcamp Final Case Frontend](https://github.com/mehmetgencv/n11-TalentHub-Backend-Bootcamp-Final-Case-Frontend)
+![App](public/images/app.png)
+
 The project is developed using technologies such as Spring and Hibernate and can be accessed via RESTful APIs.
 ## Used Technologies
 
