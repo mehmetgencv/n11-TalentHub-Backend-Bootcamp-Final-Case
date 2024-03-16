@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": "7",
     "name": "Restaurant A",
     "address": "Address A",
     "latitude": 40.7128,
@@ -10,7 +10,7 @@
     "description": "Description for Restaurant A"
   },
   {
-    "id": "2",
+    "id": "8",
     "name": "Restaurant B",
     "address": "Address B",
     "latitude": 34.0522,

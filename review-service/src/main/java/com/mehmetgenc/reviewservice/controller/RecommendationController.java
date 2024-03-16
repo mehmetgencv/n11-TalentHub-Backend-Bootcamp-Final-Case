@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("api/v1/recommendations")
 @RequiredArgsConstructor
 @Tag(name = "Recommendation Controller", description = "Recommendation Management")
+@CrossOrigin("http://localhost:3000")
 public class RecommendationController {
     private final RecommendationControllerContract recommendationControllerContract;
 
